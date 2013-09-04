@@ -1,0 +1,22 @@
+include "powch_interfaces.iol"
+include "console.iol"
+include "database.iol"
+
+inputPort self {
+	Location: "socket://localhost:8001"
+	Protocol: sodep
+	Interfaces: LoginInterface
+}
+
+execution { concurrent }
+
+main {
+	[ register( loginRequest )]{ 
+		
+	}
+	[ login( loginRequest )( authToken ){
+		
+	}]{
+		
+	}
+}

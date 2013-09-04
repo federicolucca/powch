@@ -1,0 +1,9 @@
+include "console.iol"
+
+execution { concurrent }
+
+inputPort self {
+	Location: "localhost:8000"
+	Protocol: sodep
+	Interfaces: ProfileInterface
+}

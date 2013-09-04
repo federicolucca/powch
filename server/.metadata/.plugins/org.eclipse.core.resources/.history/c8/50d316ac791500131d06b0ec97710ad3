@@ -1,0 +1,14 @@
+include "console.iol"
+include "database.iol"
+
+inputPort self {
+	Location: local
+	Protocol: sodep
+	Interfaces: 
+}
+
+execution { concurrent }
+
+main {
+	[ login( )( ) ]
+}
