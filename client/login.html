@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>PoWch</title>
+        
+        <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/powch.css"/>
+        <link rel="stylesheet" type="text/css" href="css/login.css"/> 
+        
+        <script type="text/javascript" src="lib/jquery.min.js"></script>
+        <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jolie-client.js"></script>
+        <script>
+                        
+            window.onload = function() {
+                $("#login-button").click(login);
+                function pressedEnter(evt) {
+                    if (evt.keyCode === 13) {
+                        login();
+                    }
+                }
+                $("#username-form").focus();                
+                $("#username-form").keypress(pressedEnter);
+                $("#password-form").keypress(pressedEnter);
+            };
+            
+            function login() {
+                var username = $("#username-form").val(),
+                    password = $("#password-form").val();
+                
+                function onSuccess(response) {
+                    sessionStorage.token = response.token;
+                    alert("You got this token: " + response.token);
+                }
+                function onError(error) {
+                    console.log(error);
+                }
+                if (username.length > 0 && password.length > 0) {
+                    var body = {username: username, password: password};
+                    $("#username-form").blur();
+                    JolieClient.login(body, onSuccess, onError);
+                }
+            }
+            
+            </script>
+    </head>
+	<body>
+        
+        <div id="nav-top" class="navbar navbar-fixed-top center">
+            <div class="navbar-inner">
+                <a class="brand">PoWch</a>
+            </div>
+        </div>
+        
+        <h1 id="welcome">Welcome to PoWch!</h1>
+        <div id="username-input" class="input-append">
+            <input id="username-form" type="text" placeholder="Username">
+            </input>
+            <input id="password-form" type="password" placeholder="Password">
+            </input>
+            <button id="login-button" class="btn" type="button">
+                Login
+            </button>
+        </div>
+        
+        <img id="powch-logo" src="../img/powch-small.png"></img>
+        
+        <div class="navbar navbar-fixed-bottom">
+            <div class="navbar-inner">
+            </div>
+        </div>
+        
+    </body>
+</html>
+

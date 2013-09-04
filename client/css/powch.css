@@ -1,0 +1,9 @@
+.navbar-inner {
+    background-image: -webkit-linear-gradient(top, #b9de59, #93bd27);
+}
+
+.navbar .brand {
+    position: relative;
+    left: 20px;
+    color: #ffffff;
+}
