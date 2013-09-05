@@ -8,7 +8,11 @@ outputPort DataService {
 }
 
 inputPort self {
+<<<<<<< HEAD
 	Location: local
+=======
+	Location: "local"
+>>>>>>> de09d29ef508a4bb76921d4f56f8d78fceba3d85
 	Protocol: sodep
 	Interfaces: PowchAdministrationInterface
 	Aggregates: DataService

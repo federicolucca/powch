@@ -1,0 +1,111 @@
+#contents {
+    position: absolute;
+    width: 900px;
+    height: 100%;
+    left: 50%;
+    margin-left: -450px;
+}
+
+#chart-div {
+    position: absolute;
+    top: 160px;
+    left: 0px;
+}
+
+#mwh {
+    position: relative;
+    left: 30px;
+    font-weight: normal;
+}
+
+#rating-img {
+    position: relative;
+    left: -30px;
+    top: -120px;
+}
+
+#battery-div {
+    position: absolute;
+    top: 40px;
+    left: 130px;
+}
+
+#battery-meter {
+    position: absolute;
+    width: 50px;
+    height: 30px;
+}
+
+#battery-bar {
+    0%;
+}
+
+#battery-img {
+    position: absolute;
+    height: 30px;
+}
+
+#candle-img {
+    top: 260px;
+    left: 580px;
+    position: absolute;
+}
+
+#lightbulb-img {
+    top: 160px;
+    left: 580px;
+    position: absolute;
+}
+
+#power-plant-img {
+    top: 60px;
+    left: 580px;
+    position: absolute;
+}
+
+#back-button {
+    position: absolute;
+    top: 50px;
+    left: 0px;
+}
+
+#users-div {
+    position: absolute;
+    top: 40px;
+    left: 700px;
+}
+
+#contract-label {
+    color: #ffffff;
+}
+
+#users-header {
+    position:absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    height: 40px;
+    text-align: center;
+    background-color: #4DBCE9;
+}
+
+#users-body {
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    bottom: 0;
+}
+
+#users-div {
+    position: absolute;
+    width: 200px;
+    height: 430px;
+    top: 50px;
+    left: 700px;
+    right: 60px;
+    border: 1px solid #dddddd;
+}
+
+#users-title {
+    color: #ffffff;
+}

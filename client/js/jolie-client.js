@@ -32,14 +32,20 @@ var JolieClient = JolieClient || (function() {
     API.login = function( request, callback, errorHandler ) {
         jolieCall( "login", request, callback, errorHandler );
     }
-    API.consumption = function( request, callback, errorHandler ) {
-        jolieCall( "consumption", request, callback, errorHandler );
+    API.getConsumption = function( request, callback, errorHandler ) {
+        jolieCall( "getConsumption", request, callback, errorHandler );
     }
-    API.suggestion = function( request, callback, errorHandler ) {
-        jolieCall( "suggestion", request, callback, errorHandler );
+    API.getSuggestion = function( request, callback, errorHandler ) {
+        jolieCall( "getSuggestion", request, callback, errorHandler );
     }
-    API.advice = function( request, callback, errorHandler ) {
-        jolieCall( "advice", request, callback, errorHandler );
+    API.getAdvice = function( request, callback, errorHandler ) {
+        jolieCall( "getAdvice", request, callback, errorHandler );
+    }
+    API.getPointCount = function( request, callback, errorHandler ) {
+        jolieCall( "getPointCount", request, callback, errorHandler );
+    }
+    API.getContracts = function( request, callback, errorHandler ) {
+        jolieCall( "getContracts", request, callback, errorHandler );
     }
     return API;
 })();

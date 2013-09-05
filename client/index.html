@@ -29,17 +29,20 @@
                     password = $("#password-form").val();
                 
                 function onSuccess(response) {
+                    console.log("Got a response");
                     sessionStorage.token = response.token;
                     sessionStorage.username = username;
                     console.log("Received token: " + response.token);
                     window.location.href = "main.html";
                 }
                 function onError(error) {
+                    console.log("failed");
                     console.log(error);
                 }
                 if (username.length > 0 && password.length > 0) {
                     var body = {username: username, password: password};
                     $("#username-form").blur();
+                    console.log("Logging in...");
                     JolieClient.login(body, onSuccess, onError);
                 }
             }
@@ -65,7 +68,7 @@
             </button>
         </div>
         
-        <img id="powch-logo" src="../img/powch-mini.png"></img>
+        <img id="powch-logo" src="../img/poWch_Catia_logo.png"></img>
         
         <div class="navbar navbar-fixed-bottom">
             <div class="navbar-inner">
