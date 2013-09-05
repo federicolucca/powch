@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>PoWch</title>
+        
+        <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/powch.css"/>
+        <link rel="stylesheet" type="text/css" href="css/contract.css"/>
+        
+        <script type="text/javascript" src="lib/jquery.min.js"></script>
+        <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="lib/chart.min.js"></script>
+        <script type="text/javascript" src="js/jolie-client.js"></script>
+        <script>
+            
+            var token, consumptionData, suggestionData;
+            
+            window.onload = function() {              
+                var request, users;
+                $("#back-button").click(function() {
+                                        window.history.back();
+                                        });
+                // Get contract information
+                request = {id: sessionStorage.contractId, token: sessionStorage.token};
+                
+                //TODO: ADD!
+                //JolieClient.getSuggestion(request, onGotSuggestion, onError);
+                //JolieClient.getConsumption(request, onGotConsumption, onError);
+                
+                users = sessionStorage.contractUsers;
+                for (var i; i < users; i++) {
+                    displayUser(users[i]);
+                }
+                
+                displayInfo(); //TODO: DELETE
+            };
+            
+            function displayInfo() {
+                // Display the chart
+                var lineChartData = {
+                    labels : ["January","February","March","April","May","June","July"],
+                    datasets : [
+                                {
+                                fillColor : "rgba(220,220,220,0.5)",
+                                strokeColor : "rgba(220,220,220,1)",
+                                pointColor : "rgba(220,220,220,1)",
+                                pointStrokeColor : "#fff",
+                                data : [65,59,90,81,56,55,40]
+                                //data: suggestionData
+                                },
+                                {
+                                fillColor : "rgba(151,187,205,0.5)",
+                                strokeColor : "rgba(151,187,205,1)",
+                                pointColor : "rgba(151,187,205,1)",
+                                pointStrokeColor : "#fff",
+                                data : [28,48,40,19,96,27,100]
+                                //data: consumptionData
+                                }
+                                ]
+                }
+                
+                var canvas = document.getElementById("chart").getContext("2d");
+                var chart = new Chart(canvas).Line(lineChartData);
+                
+                // Display the battery (remaining energy)
+                var totalEnergy = 0,
+                    consumedEnergy = 0,
+                    remainingEnergy,
+                    percentage;
+                
+                suggestionData = [2,2,2,2,2];
+                consumptionData = [1,1,1,1,1];
+                
+                for (var i = 0; i < suggestionData.length; i++) {
+                    totalEnergy += suggestionData[i];
+                }
+                for  (var i = 0; i < consumptionData.length; i++) {
+                    consumedEnergy += consumptionData[i];
+                }                
+                remainingEnergy = totalEnergy - consumedEnergy;
+                percentage = (remainingEnergy / totalEnergy) * 100;
+                $("#battery-bar").css("width", percentage + "%");
+            };
+            
+            function displayUser(user) {
+                var link = document.createElement("a");
+                $(link).html(user.name);
+                $(link).click(function() {
+                              console.log("Not yet implemented");
+                              });
+                $("#users-div").append(link);
+                console.log(link);
+            }
+            
+            // Callback functions
+            function onGotSuggestion(response) {
+                consumptionData = response.data;
+                // If all necessary data is received, display the chart
+                if (consumptionData && suggestionData) {
+                    displayInfo();
+                }
+            };
+            function onGotConsumption(response) {
+                suggestionData = response.data;
+                // If all necessary data is received, display the chart
+                if (consumptionData && suggestionData) {
+                    displayInfo();
+                }
+            };
+            function onError(error) {
+                console.log(error);
+            };
+            
+            </script>
+    </head>
+	<body>
+        
+        <div id="contents">
+            
+            <div id="nav-top" class="navbar navbar-fixed-top center">
+                <div class="navbar-inner">
+                    <a class="brand">PoWch</a>
+                    <ul class="nav">
+                        <li><a id="contract-label" href="#">Link</a></li>
+                    </ul>
+                    
+                </div>
+            </div>
+            
+            <button id="back-button" class="btn" type="button">
+                <i class="icon-arrow-left"></i>
+                Profile
+            </button>
+            
+            <div id="chart-div">
+                <h5 id="mwh">MWh</h5>
+                <canvas id="chart" height="300" width="600"></canvas>
+                <img id="power-plant-img" src="../img/power-plant.png"></img>
+                <img id="lightbulb-img" src="../img/lightbulb.png"></img>
+                <img id="candle-img" src="../img/candle.png"></img>
+            </div>
+            
+            <div id="users-div">
+                <div id="users-header">
+                    <h5 id="users-title">Users sharing this contract</h5>
+                </div>
+                <div id="users-body">
+                </div>
+                
+            </div>
+            
+            <div id="battery-div">
+                <h4>Remaining energy</h4>
+                <div id="battery-meter" class="progress progress-success progress-striped">
+                    <div id="battery-bar" class="bar"></div>
+                </div>
+                <img id="battery-img" src="../img/battery.png"></img>
+            </div>
+            
+            <div class="navbar navbar-fixed-bottom">
+                <div class="navbar-inner">
+                </div>
+            </div>
+            
+        </div>
+    </body>
+</html>
+

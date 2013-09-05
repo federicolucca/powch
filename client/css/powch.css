@@ -1,5 +1,7 @@
 .navbar-inner {
-    background-image: -webkit-linear-gradient(top, #b9de59, #93bd27);
+    /*background-image: -webkit-linear-gradient(top, #D1E751, #a9c023);*/
+    background-image: none;
+    background-color: #D1E751;
 }
 
 .navbar .brand {
