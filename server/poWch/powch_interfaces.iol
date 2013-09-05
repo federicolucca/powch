@@ -6,6 +6,13 @@ interface ProfileInterface {
 		getContracts( AuthToken )( Contracts )
 }
 
+interface ContractInterface {
+	RequestResponse:
+		getConsumption( ConsumptionRequest )( ConsumptionResponse ),
+		getContractPointCount( ContractRequest )( PointCountResponse ),
+		getSuggestion( ConsumptionRequest )( ConsumptionResponse )
+}
+
 interface PowchAdministrationInterface{
 	OneWay: quit( void )
 }

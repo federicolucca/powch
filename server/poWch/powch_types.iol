@@ -20,3 +20,21 @@ type Contract: void {
 	.label: string
 	.users[1,*]: string
 }
+
+type ContractRequest: void {
+	.id: string
+	.token: string
+}
+
+type ConsumptionRequest: void {
+	.contractData: ContractRequest
+	.time?: void {
+		.start: int
+		.end?: int 
+	}
+}
+
+type ConsumptionResponse: void {
+	.startDate: string
+	.data[1,*]: double
+}

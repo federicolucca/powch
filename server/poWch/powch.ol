@@ -4,11 +4,11 @@ include "powch_interfaces.iol"
 execution { concurrent }
 
 outputPort DataService {
-	Interfaces: LoginInterface, ProfileInterface
+	Interfaces: LoginInterface, ProfileInterface, ContractInterface
 }
 
 inputPort self {
-	Location: "socket://localhost:9000"
+	Location: local
 	Protocol: sodep
 	Interfaces: PowchAdministrationInterface
 	Aggregates: DataService
@@ -19,5 +19,5 @@ embedded {
 }
 
 main {
-	[ quit() ]{ EXIT }
+	[ quit() ]{ nullProcess }
 }
