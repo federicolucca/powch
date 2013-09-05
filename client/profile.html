@@ -24,10 +24,11 @@
                 currentContract = sessionStorage.contract;
                 $("#username").html(sessionStorage.username);
                 
+                console.log(sessionStorage.token);
                 request = {token: sessionStorage.token};
-                //JolieClient.getPointCount(request, onGotPoints, onError);
+                JolieClient.getPointCount(request, onGotPoints, onError);
                 //JolieClient.getContracts(request, onGotContracts, onError);
-                displayContract({label: "Apartment"});
+                // displayContract({label: "Apartment"});
             };
             
             function displayContract(contract) {
