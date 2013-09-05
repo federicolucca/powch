@@ -15,24 +15,14 @@
             
             var currentContract,
                 suggestionData,
-                consumptionData;
+                consumptionData,
+                remainingChallenges,
+                remainingAdvice;
             
             window.onload = function() {
                 var request = {token: sessionStorage.token};
                 currentContract = sessionStorage.contract;
                 $("#username").html(sessionStorage.username);
-                
-                $("#challenges").click(function() {
-                                       JolieClient.getAdvice(request, onGotAdvice, onError);
-                                       //$("#advice").modal("show");
-                                       });
-                
-                $("#advice").click(function() {
-                                       console.log("My request:");
-                                       console.log(request);
-                                       JolieClient.getChallenges(request, onGotChallenges, onError);
-                                       });
-                
                 $("#store").click(function() {
                                     window.location.href = "store.html";
                                   });
@@ -40,6 +30,7 @@
                 console.log("Token: " + sessionStorage.token);
                 
                 JolieClient.getChallenges(request, onGotChallenges, onError);
+                JolieClient.getAdvice(request, onGotAdvice, onError);
                 JolieClient.getPointCount(request, onGotPoints, onError);
                 JolieClient.getContracts(request, onGotContracts, onError);
                 // displayContract({label: "Apartment"});
@@ -74,11 +65,26 @@
             }
             
             function onGotChallenges(response) {
-                console.log(response);
+                remainingChallenges = response.message.length;
+                $("#challenges").click(function() {
+                                       console.log(response);
+                                       console.log(response.message);
+                                        console.log();
+                                       $("#challenges-message").html(response.message[0].content);
+                                       $("#challenge-modal").modal("show");
+                                       });
+                $("#challenges").html("Challenges (" + remainingChallenges+ ")");
             }
             
             function onGotAdvice(response) {
-                console.log(response);
+                advice = response.message.length;
+                $("#advice").click(function() {
+                                       $("#advice").html("Advice (" + remainingAdvice + ")");
+                                       console.log();
+                                       $("#advice-message").html(response.message[0].content);
+                                       $("#advice-modal").modal("show");
+                                       });
+                $("#advice").html("Advice (" + response.message.length + ")");
             }
             
             function onError(error) {
@@ -88,23 +94,6 @@
             </script>
     </head>
 	<body>
-        
-        <!-- Modals -->
-        <!-- User media request modal -->
-        <div id="challenge-modal" class="modal hide fade in">
-            <div class="modal-header">
-                <a class="close" data-dismiss="modal">
-                    <!--i class="icon-remove-circle"></i-->
-                </a>
-                <h3> User guide </h3>
-            </div>
-            <div class="modal-body">
-                <p>Coming soon!</p>
-            </div>
-            <div class="modal-footer">
-                <a href="#" class="btn btn-small" data-dismiss="modal">Close</a>
-            </div>
-        </div>
         
         <div id="contents">
             <div id="nav-top" class="navbar navbar-fixed-top center">
@@ -163,6 +152,44 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Modals -->
+        <div id="challenge-modal" class="modal hide fade in">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">
+                    <i class="icon-remove-circle"></i>
+                </a>
+
+                <h3>
+                    Challenges
+                </h3>
+                
+            </div>
+            <div id="challenges-message" class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <a href="#" id="close-feedback" class="btn btn-small" data-dismiss="modal">Close</a>
+            </div>
+        </div>
+        
+        <div id="advice-modal" class="modal hide fade in">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">
+                    <i class="icon-remove-circle"></i>
+                </a>
+                
+                <h3>
+                    Advice
+                </h3>
+                
+            </div>
+            <div id="advice-message" class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <a href="#" id="close-feedback" class="btn btn-small" data-dismiss="modal">Close</a>
+            </div>
+        </div>
+        
     </body>
 </html>
 

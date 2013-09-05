@@ -4,6 +4,22 @@
     background-color: #D1E751;
 }
 
+.modal-header {
+    background-color: #D1E751;
+}
+
+/*
+.modal {
+    max-height: 400px;
+}
+
+.modal-footer {
+    position:absolute;
+    top: 0;
+}
+*/
+
+
 .navbar .brand {
     position: relative;
     left: 20px;
