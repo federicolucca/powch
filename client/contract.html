@@ -7,6 +7,21 @@
         <link rel="stylesheet" type="text/css" href="css/powch.css"/>
         <link rel="stylesheet" type="text/css" href="css/contract.css"/>
         
+        <style type="text/css">
+            #hidden-user {
+                display: none;
+            }
+            
+            .proto-user {
+                display: inline-block;
+                width: 100%;
+                text-align: center;
+                font-size: 1.5em;
+                margin: 10px 0px;
+            }
+            </style>
+        
+        
         <script type="text/javascript" src="lib/jquery.min.js"></script>
         <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="lib/chart.min.js"></script>
@@ -83,13 +98,10 @@
             };
             
             function displayUser(user) {
-                var link = document.createElement("a");
-                $(link).html(user.name);
-                $(link).click(function() {
-                              console.log("Not yet implemented");
-                              });
-                $("#users-div").append(link);
-                console.log(link);
+                var userLink = $("#hidden-user").clone();
+                $("#users-body").append(userLink);
+                userLink.html(user.name);
+                userLink.css("display", "inline-block");
             }
             
             // Callback functions
@@ -135,9 +147,9 @@
             <div id="chart-div">
                 <h5 id="mwh">MWh</h5>
                 <canvas id="chart" height="300" width="600"></canvas>
-                <img id="power-plant-img" src="../img/power-plant.png"></img>
-                <img id="lightbulb-img" src="../img/lightbulb.png"></img>
-                <img id="candle-img" src="../img/candle.png"></img>
+                <img id="power-plant-img" src="img/power-plant.png"></img>
+                <img id="lightbulb-img" src="img/lightbulb.png"></img>
+                <img id="candle-img" src="img/candle.png"></img>
             </div>
             
             <div id="users-div">
@@ -145,8 +157,9 @@
                     <h5 id="users-title">Users sharing this contract</h5>
                 </div>
                 <div id="users-body">
+                    <a id="hidden-user" class="proto-user">
+                    </a>
                 </div>
-                
             </div>
             
             <div id="battery-div">
@@ -154,7 +167,7 @@
                 <div id="battery-meter" class="progress progress-success progress-striped">
                     <div id="battery-bar" class="bar"></div>
                 </div>
-                <img id="battery-img" src="../img/battery.png"></img>
+                <img id="battery-img" src="img/battery.png"></img>
             </div>
             
             <div class="navbar navbar-fixed-bottom">
