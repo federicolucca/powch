@@ -30,8 +30,7 @@ var JolieClient = JolieClient || (function() {
     }
 
     API.login = function( request, callback, errorHandler ) {
-                                  // callback({token: "fakeToken"});
-                                  jolieCall( "login", request, callback, errorHandler );
+        jolieCall( "login", request, callback, errorHandler );
     }
     API.consumption = function( request, callback, errorHandler ) {
         jolieCall( "consumption", request, callback, errorHandler );
