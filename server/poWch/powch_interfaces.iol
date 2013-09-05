@@ -1,3 +1,5 @@
+include "powch_types.iol"
+
 interface ProfileInterface {
 	RequestResponse: 
 		getPointCount( AuthToken )( PointCountResponse ),
@@ -5,7 +7,7 @@ interface ProfileInterface {
 }
 
 interface LoginInterface {
-	OneWay:	register( UserRegistration )
+	OneWay:	register( LoginRequest )
 	RequestResponse: 
 		login( LoginRequest )( AuthToken )
 }
