@@ -7,6 +7,46 @@
         <link rel="stylesheet" type="text/css" href="css/powch.css"/>
         <link rel="stylesheet" type="text/css" href="css/index.css"/> 
         
+        <style type="text/css">
+            /*
+            #user-info {
+                position: absolute;
+                top: 100px;
+                left: 50%;
+                width: 300px;
+                margin-left: -150px;
+                height: 250px;
+            }
+            
+            #username {
+                position: absolute;
+                top: 20px;
+                font-weight: bold;
+                left: 140px;
+                margin-left:
+            }
+            
+            #points-div {
+                position: absolute;
+                top: 60px;
+                left: 130px;
+            }
+            
+            #powch {
+                position: absolute;
+                top: 10px;
+            }
+            
+            #point-count {
+                position: absolute;
+                width: 100px;
+                left: 55px;
+                top: 25px;
+            }
+*/
+            </style>
+        
+        
         <script type="text/javascript" src="lib/jquery.min.js"></script>
         <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/jolie-client.js"></script>
@@ -25,9 +65,16 @@
                 
                 console.log("Token: " + sessionStorage.token);
                 request = {token: sessionStorage.token};
+                /*
                 JolieClient.getPointCount(request, onGotPoints, onError);
                 JolieClient.getContracts(request, onGotContracts, onError);
+                 */
                 // displayContract({label: "Apartment"});
+                $("#point-count").html(sessionStorage.points);
+                $(".hundredpoints").click(function(){
+                    sessionStorage.points -= 100;
+                    $("#point-count").html(sessionStorage.points);
+                });                
             };
             
            
@@ -77,7 +124,7 @@
   <div class="thumbnail clearfix">
     <img src="img/muse.png" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
     <div class="caption" class="pull-left">
-      <a href="http://bootsnipp.com/" class="btn btn-large icon  pull-right">Select (400pts)</a>
+      <a href="http://bootsnipp.com/" class="btn btn-large icon  pull-right fourhundred">Select (400pts)</a>
       <h4>      
       <a href="#" >#2 Museum Tickets </a>
       </h4>
@@ -91,7 +138,7 @@
   <div class="thumbnail clearfix">
     <img src="img/muse.png" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
     <div class="caption" class="pull-left">
-      <a href="http://bootsnipp.com/" class="btn btn-large icon  pull-right">Select (600pts)</a>
+      <a class="btn btn-large icon  pull-right sixhundred">Select (600pts)</a>
       <h4>      
       <a href="#" >#1 Family Museum Ticket </a>
       </h4>
@@ -105,7 +152,7 @@
   <div class="thumbnail clearfix">
     <img src="img/car.png" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
     <div class="caption" class="pull-left">
-      <a href="http://bootsnipp.com/" class="btn btn-large icon  pull-right">Select (40pts)</a>
+      <a href="http://bootsnipp.com/" class="btn btn-large icon  pull-right fortypoints">Select (40pts)</a>
       <h4>      
       <a href="#" >#1 Park Ticket(60min) </a>
       </h4>
@@ -119,7 +166,7 @@
   <div class="thumbnail clearfix">
     <img src="img/car.png" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
     <div class="caption" class="pull-left">
-      <a href="http://bootsnipp.com/" class="btn btn-large icon  pull-right">Select (100pts)</a>
+      <a class="btn btn-large icon  pull-right hundredpoints">Select (100pts)</a>
       <h4>      
       <a href="#" >#1 Park Ticket(120min)</a>
       </h4>

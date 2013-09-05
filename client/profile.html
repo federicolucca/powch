@@ -62,6 +62,7 @@
             
             function onGotPoints(response) {
                 $("#point-count").html("x " + response.count);
+                sessionStorage.points = response.count;
             }
             
             function onGotChallenges(response) {
@@ -80,7 +81,6 @@
                 advice = response.message.length;
                 $("#advice").click(function() {
                                        $("#advice").html("Advice (" + remainingAdvice + ")");
-                                       console.log();
                                        $("#advice-message").html(response.message[0].content);
                                        $("#advice-modal").modal("show");
                                        });
