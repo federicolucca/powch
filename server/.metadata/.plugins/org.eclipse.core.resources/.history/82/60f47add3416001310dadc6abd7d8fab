@@ -19,8 +19,6 @@ embedded {
 	Jolie: "DataService.ol" in DataService
 }
 
-init { println@Console("running")()}
-
 main {
 	[ quit() ]{ nullProcess }
 }

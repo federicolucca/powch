@@ -1,11 +1,10 @@
 include "console.iol"
 include "powch_interfaces.iol"
 include "string_utils.iol"
-include "time.iol"
 
 outputPort Powch {
-//	Location: "local"
-//	Protocol: sodep
+//	Location: "socket://localhost:9001"
+	Protocol: sodep
 	Interfaces: LoginInterface, ProfileInterface, ContractInterface
 }
 
@@ -14,7 +13,6 @@ embedded {
 }
 
 main {
-	sleep@Time( 1000 )();
 	loginRequest.username = "mario rossi";
 	loginRequest.password = "password";
 	login@Powch( loginRequest )( authToken );
