@@ -28,16 +28,12 @@ init {
 			with( .("ENEL010000") ){
 				.label = "House";
 				.users[ #.users ] = "mario rossi";
-				.users[ #.users ] = "viola verdi";
-				.users[ #.users ] = "maria rossi"
+				.users[ #.users ] = "mario bianchi"
 			};
 			
 			with( .( "HERA148231" ) ){
 				.label = "Building";
-				.users[ #.users ] = "mario rossi";
-				.users[ #.users ] = "arthur o' camlhot";
-				.users[ #.users ] = "ginevra del lago";
-				.users[ #.users ] = "lance cilotto"
+				.users[ #.users ] = "mario rossi"
 			}
 			
 		};
