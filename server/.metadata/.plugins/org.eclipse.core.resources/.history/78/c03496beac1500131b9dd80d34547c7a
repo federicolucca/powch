@@ -1,0 +1,57 @@
+include "powch_interfaces.iol"
+include "console.iol"
+include "xml_utils.iol"
+include "file.iol"
+
+inputPort self {
+	Location: "socket://localhost:8001"
+	Protocol: sodep
+	Interfaces: LoginInterface
+}
+
+constants {
+	users_xml = "users.xml",
+	contracts_xml = "contracts.xml",
+	contract_xml = "contract.xml"
+}
+
+define dumpData {
+	valueToXmlRequest.root = global.users;
+	valueToXmlRequest.rooNodeName = "users";
+	valueToXml@XmlUtils( valueToXmlRequest )( response );
+	fileRequest.filename = users_xml;
+	fileRequest.content = response;
+	writeFile@File( fileRequest )();
+	
+	valueToXmlRequest.root = global.contracts;
+	valueToXmlRequest.rooNodeName = "users";
+	valueToXml@XmlUtils( valueToXmlRequest )( response );
+	fileRequest.filename = users_xml;
+	fileRequest.content = response;
+	writeFile@File( fileRequest )();
+	
+	valueToXmlRequest.root = global.users;
+	valueToXmlRequest.rooNodeName = "users";
+	valueToXml@XmlUtils( valueToXmlRequest )( response );
+	fileRequest.filename = users_xml;
+	fileRequest.content = response;
+	writeFile@File( fileRequest )()
+}
+
+define addUser {
+	_addUser.username
+}
+
+main {
+
+
+	
+//	[ register( loginRequest )]{ 
+//		
+//	}
+//	[ login( loginRequest )( authToken ){
+//		
+//	}]{
+//		
+//	}
+}

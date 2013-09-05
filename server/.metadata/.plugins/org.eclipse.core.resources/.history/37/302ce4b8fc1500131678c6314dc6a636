@@ -1,0 +1,13 @@
+include "console.iol"
+include "powch_interfaces.iol"
+
+outputPort Powch {
+	Location: "socket://localhost:8000"
+	Protocol: sodep
+	Interfaces: LoginInterface
+}
+
+main {
+	loginRequest.username = "mario rossi";
+	loginRequest.password = "password"
+}	

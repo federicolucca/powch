@@ -1,0 +1,6 @@
+interface LoginInterface {
+	RequestResponse: 
+		login( LoginRequest )( AuthToken ),
+		getPointCount( AuthToken )( PointCountResponse ),
+		getContracts( AuthToken )( Contracts )
+}

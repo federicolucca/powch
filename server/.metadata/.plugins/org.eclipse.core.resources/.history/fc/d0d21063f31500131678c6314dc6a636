@@ -1,0 +1,52 @@
+include "powch_interfaces.iol"
+include "console.iol"
+
+execution { concurrent }
+
+inputPort self {
+	Location: "socket://localhost:8001"
+	Protocol: sodep
+	Interfaces: LoginInterface
+}
+
+
+init {
+	with ( global.users ){
+		.("mario rossi").password = "password";
+		.("mario rossi").token = new
+	};
+	
+	with ( global.contracts ){
+		.mario_rossi[ #.mario_rossi ] = "ENEL010000";
+		.mario_rossi[ #.mario_rossi ] = "HERA148231";
+		.mario_rossi[ #.mario_rossi ] = "ENELENERGIA173123"
+	}
+	
+	with( global.contract ){
+		.( "ENEL010000" )
+	}
+	
+	
+}
+
+main {
+	for( i=0, i<3, i++ ){
+	_addUser.username = "name" + i + " surname" + i;
+	_addUser.password = "password" + i;
+	
+	addUser
+	};
+	
+	dumpData
+	
+
+	
+//	[ register( loginRequest )]{ 
+//		
+//	}
+//	[ login( loginRequest )( authToken ){
+//		
+//	}]{
+//		
+//	}
+}

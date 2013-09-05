@@ -1,0 +1,24 @@
+include "console.iol"
+
+execution { concurrent }
+
+inputPort self {
+	Location: "socket://localhost:8000"
+	Protocol: sodep
+	Interfaces: ProfileInterface
+	Aggregates: LoginService
+}
+
+outputPort LoginService {
+	Interfaces: LoginInterface
+}
+
+embedded {
+	Jolie: "loginServer.ol" in LoginService
+}
+
+main {
+	
+//	[ getPointCount()(){}]{ nullProcess }
+//	[ getContracts()(){}]{ nullProcess }
+}

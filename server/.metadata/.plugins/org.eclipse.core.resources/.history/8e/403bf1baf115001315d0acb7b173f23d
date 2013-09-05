@@ -1,0 +1,39 @@
+include "powch_interfaces.iol"
+include "console.iol"
+include "xml_utils.iol"
+include "file.iol"
+
+inputPort self {
+	Location: "socket://localhost:8001"
+	Protocol: sodep
+	Interfaces: LoginInterface
+}
+
+init {
+	with ( global.users ){
+		.mario_rossi.password = "password";
+		.mario_rossi.token = new
+	}
+}
+
+main {
+	for( i=0, i<3, i++ ){
+	_addUser.username = "name" + i + " surname" + i;
+	_addUser.password = "password" + i;
+	
+	addUser
+	};
+	
+	dumpData
+	
+
+	
+//	[ register( loginRequest )]{ 
+//		
+//	}
+//	[ login( loginRequest )( authToken ){
+//		
+//	}]{
+//		
+//	}
+}
