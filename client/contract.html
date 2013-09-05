@@ -35,25 +35,36 @@
                 $("#back-button").click(function() {
                                         window.history.back();
                                         });
-                // Get contract information
-                request = {id: sessionStorage.contractId, token: sessionStorage.token};
+                // Get contract information                
+                request = {contractData: {id: sessionStorage.contractId, token: sessionStorage.token}};
                 
-                //TODO: ADD!
                 JolieClient.getSuggestion(request, onGotSuggestion, onError);
                 JolieClient.getConsumption(request, onGotConsumption, onError);
                 
-                users = sessionStorage.contractUsers;
-                for (var i; i < users; i++) {
+                users = JSON.parse(sessionStorage.contractUsers);
+                console.log("GAAAH");
+                console.log(users);
+                for (var i = 0; i < users.length; i++) {
+                    console.log("Going to display " + users[i]);
                     displayUser(users[i]);
-                }
-                
-                //displayInfo(); //TODO: DELETE
+                }                
             };
             
             function displayInfo() {
                 // Display the chart
                 var lineChartData = {
-                    labels : ["January","February","March","April","May","June","July"],
+                    labels : ["January",
+                              "February",
+                              "March",
+                              "April",
+                              "May",
+                              "June",
+                              "July",
+                              "August",
+                              "September",
+                              "October",
+                              "November",
+                              "December"],
                     datasets : [
                                 {
                                 fillColor : "rgba(220,220,220,0.5)",
@@ -98,9 +109,10 @@
             };
             
             function displayUser(user) {
+                console.log("Displaying: " + user);
                 var userLink = $("#hidden-user").clone();
                 $("#users-body").append(userLink);
-                userLink.html(user.name);
+                userLink.html(user);
                 userLink.css("display", "inline-block");
             }
             

@@ -24,22 +24,25 @@
                 currentContract = sessionStorage.contract;
                 $("#username").html(sessionStorage.username);
                 
-                console.log(sessionStorage.token);
+                console.log("Token: " + sessionStorage.token);
                 request = {token: sessionStorage.token};
                 JolieClient.getPointCount(request, onGotPoints, onError);
-                //JolieClient.getContracts(request, onGotContracts, onError);
+                JolieClient.getContracts(request, onGotContracts, onError);
                 // displayContract({label: "Apartment"});
             };
             
             function displayContract(contract) {
-                //id, label, users
                 var listItem, link;
                 listItem = document.createElement("li");
                 link = document.createElement("a");
                 $(link).html(contract.label);
                 $(link).click(function() {
                               sessionStorage.contractId = contract.id;
-                              sessionStorage.contractUsers = contract.users;
+                              if (contract.users.length > 0) {
+                                sessionStorage.contractUsers = JSON.stringify(contract.users);
+                              } else {
+                                sessionStorage.contractUsers = contract.users[0];
+                              }
                               window.location.href = "contract.html";
                               });
                 $(listItem).append(link);
@@ -55,7 +58,7 @@
             }
             
             function onGotPoints(response) {
-                $("#point-count").html("x " + response.points);
+                $("#point-count").html("x " + response.count);
             }
             
             function onError(error) {
@@ -93,6 +96,11 @@
                 </div>
                 
             </div>
+            
+            <button id="challenges-button" class="btn" type="button">
+                <i class="icon-arrow-left"></i>
+                Challenges
+            </button>
             
             <div class="navbar navbar-fixed-bottom">
                 <div class="navbar-inner">

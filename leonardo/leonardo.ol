@@ -32,7 +32,7 @@ RequestResponse:
 outputPort loginService {
 	Location: "local"
 	Protocol: sodep
-	Interfaces: LoginInterface
+	Interfaces: LoginInterface, ProfileInterface, ContractInterface
 }
 
 embedded {
