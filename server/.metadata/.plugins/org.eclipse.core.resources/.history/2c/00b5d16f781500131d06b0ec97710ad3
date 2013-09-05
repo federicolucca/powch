@@ -1,4 +1,0 @@
-include "console.iol"
-
-execution { concurrent }
-

@@ -1,9 +1,0 @@
-type LoginRequest: void {
-	.username: void
-	.password: void
-}
-
-type AuthToken: void {
-	.token: string
-}
-
