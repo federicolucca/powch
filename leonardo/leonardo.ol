@@ -30,9 +30,13 @@ RequestResponse:
 }
 
 outputPort loginService {
-	Location: "socket://localhost:9000"
+	Location: "local"
 	Protocol: sodep
 	Interfaces: LoginInterface
+}
+
+embedded {
+	Jolie: "../server/poWch/powch.ol" in loginService
 }
 
 inputPort HTTPInput {
