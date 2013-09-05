@@ -8,7 +8,7 @@ outputPort DataService {
 }
 
 inputPort self {
-	Location: "local"
+	Location: "socket://localhost:9000"
 	Protocol: sodep
 	Interfaces: PowchAdministrationInterface
 	Aggregates: DataService
