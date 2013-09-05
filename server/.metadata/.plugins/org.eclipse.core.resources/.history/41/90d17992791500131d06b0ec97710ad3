@@ -1,8 +1,0 @@
-include "console.iol"
-include "database.iol"
-
-execution { concurrent }
-
-main {
-	[ login()]
-}

@@ -3,22 +3,21 @@ include "powch_interfaces.iol"
 
 execution { concurrent }
 
-outputPort LoginService {
-	Interfaces: LoginInterface
+outputPort DataService {
+	Interfaces: LoginInterface, ProfileInterface
 }
 
 inputPort self {
 	Location: "socket://localhost:9000"
 	Protocol: sodep
-	Interfaces: ProfileInterface
-	Aggregates: LoginService
+	Interfaces: PowchAdministrationInterface
+	Aggregates: DataService
 }
 
 embedded {
-	Jolie: "loginService.ol" in LoginService
+	Jolie: "DataService.ol" in DataService
 }
 
 main {
-	[ getPointCount()(){ nullProcess }]{ nullProcess }
-	[ getContracts()(){ nullProcess }]{ nullProcess }
+	[ quit() ]{ EXIT }
 }

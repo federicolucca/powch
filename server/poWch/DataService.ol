@@ -1,5 +1,6 @@
 include "powch_interfaces.iol"
 include "console.iol"
+include "string_utils.iol"
 
 execution { concurrent }
 
@@ -12,19 +13,26 @@ inputPort self {
 init {
 	with ( global.users ){
 		.("mario rossi").password = "password";
-		.("mario rossi").token = "blablabla"
+		.("mario rossi").token = new
 	};
 	
 	with ( global.contracts ){
-		.("mario rossi")[ #.( "mario rossi" ) ] = "ENEL010000";
-		.("mario rossi")[ #.( "mario rossi") ] = "HERA148231";
-		.( "mario rossi")[ #.( "mario rossi" )] = "ENELENERGIA173123"
+		.( "mario rossi" )[ #.( "mario rossi" ) ] = "ENEL010000";
+		.( "mario rossi" )[ #.( "mario rossi" ) ] = "HERA148231"
 	};
 	
 	with( global.contract ){
-		.( "ENEL010000" ).label = "House";
-		.( "HERA148231" ).label = "Building";
-		.( "ENELENERGIA173123000" ).label = "Garden"
+		with( .("ENEL010000") ){
+			.label = "House";
+			.users[ #.users ] = "mario rossi";
+			.users[ #.users ] = "mario bianchi"
+		};
+		
+		with( .( "HERA148231" ) ){
+			.label = "Building";
+			.users[ #.users ] = "mario rossi"
+		}
+		
 	};
 	
 	with( global.points ){
@@ -34,7 +42,7 @@ init {
 
 define findUsernameByToken {
 	foreach ( name : global.users ){
-		if ( global.users.( name ).token == _findUsernameByToken.token ){
+		if ( global.users.(name).token == _findUsernameByToken.token ){
 			_findUsernameByToken.username = name
 		}
 	}
@@ -53,9 +61,21 @@ main {
 	[ getPointCount( authToken )( pointCountResponse ){
 		_findUsernameByToken.token = authToken.token;
 		findUsernameByToken;
-		println@Console( _findUsernameByToken.username )();
-		pointCountResponse.count = global.points.( _findUsernameByToken.username ).count;
-		println@Console( pointCountResponse.count )()
+		pointCountResponse.count = global.points.( _findUsernameByToken.username ).count
+	}]{ nullProcess }
+	
+	[ getContracts( authToken )( response ){
+		_findUsernameByToken.token = authToken.token;
+		findUsernameByToken;
+		username = _findUsernameByToken.username;
+		for( i=0, i < #global.contracts.( username ), i++ ){
+			contractID = global.contracts.( username )[ i ];
+			response.contracts[ #response.contracts ].id = contractID;
+			with ( response.contracts[ #response.contracts-1 ] ){
+				.label = global.contract.( contractID ).label;
+				.users << global.contract.( contractID ).users
+			}
+		}
 	}]{ nullProcess }
 	
 }

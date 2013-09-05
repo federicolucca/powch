@@ -1,6 +1,0 @@
-include "console.iol"
-include "database.iol"
-
-main {
-	register
-}

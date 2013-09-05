@@ -12,7 +12,7 @@ type PointCountResponse: void {
 }
 
 type Contracts: void {
-	.constracts[1,*]: Contract
+	.contracts*: Contract
 }
 
 type Contract: void {
