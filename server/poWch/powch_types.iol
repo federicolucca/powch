@@ -38,3 +38,12 @@ type ConsumptionResponse: void {
 	.startDate: string
 	.data[1,*]: double
 }
+
+type Messages: void {
+	.message*: Message
+}
+
+type Message: void {
+	.title: string
+	.content: string
+}

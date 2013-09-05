@@ -10,7 +10,11 @@ interface ContractInterface {
 	RequestResponse:
 		getConsumption( ConsumptionRequest )( ConsumptionResponse ),
 		getContractPointCount( ContractRequest )( PointCountResponse ),
-		getSuggestion( ConsumptionRequest )( ConsumptionResponse )
+		getSuggestion( ConsumptionRequest )( ConsumptionResponse ),
+		getAdvices( AuthToken )( Messages ),
+		getContractAdvices( ContractRequest )( Messages ),
+		getChallenges( AuthToken )( Messages ),
+		getContractChallenges( ContractRequest )( Messages )
 }
 
 interface PowchAdministrationInterface{

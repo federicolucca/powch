@@ -8,9 +8,7 @@ outputPort DataService {
 }
 
 inputPort self {
-//	Location: "socket://localhost:9001"
 	Location: "local"
-	Protocol: sodep
 	Interfaces: PowchAdministrationInterface
 	Aggregates: DataService
 }
@@ -19,7 +17,7 @@ embedded {
 	Jolie: "DataService.ol" in DataService
 }
 
-init { println@Console("running")()}
+init { println@Console("powch running")() }
 
 main {
 	[ quit() ]{ nullProcess }

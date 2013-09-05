@@ -1,0 +1,219 @@
+include "powch_interfaces.iol"
+include "console.iol"
+include "string_utils.iol"
+include "math.iol"
+
+execution { concurrent }
+
+inputPort self {
+	Location: "local"
+//	Protocol: sodep
+	Interfaces: LoginInterface, ProfileInterface,	ContractInterface
+}
+
+init {
+	println@Console("dataService running")();
+	if ( !( global.first ) ){
+		global.first=true;
+		
+		with ( global.users ){
+			.("mario rossi").password = "password";
+			.("mario rossi").token = new
+		};
+		
+		with ( global.contracts ){
+			.( "mario rossi" )[ #.( "mario rossi" ) ] = "ENEL010000";
+			.( "mario rossi" )[ #.( "mario rossi" ) ] = "HERA148231"
+		};
+		
+		with( global.contract ){
+			with( .("ENEL010000") ){
+				.label = "House";
+				.users[ #.users ] = "mario rossi";
+				.users[ #.users ] = "viola verdi";
+				.users[ #.users ] = "maria rossi";
+				
+				with( .advices[ #.advices ] ){
+					.title = "Let s go LED!"//;
+//					.content = "<p>There are three types of energy-saving light bulb: compact fluorescent lamps (CFLs), halogens and LEDs.</p><p>LEDs are the most expensive, but do have benefits over the other types:</p><p>LEDs use 90 percent less energy than incandescents (CFLs use 60-80 percent less than incandescents, and halogens use 20-30 percent less).</p><p>LEDs can last for 25-30 years, dependent on use.</p><p>LEDs give out their light quickly at start-up, so you don't have to put up with a few moments of dim light when you flick the light switch.</p><p>LED lights don't contain mercury (CFLs do, although it's only a small amount).</p><p>Our tests have found that LED lights, like halogens, work fine in low temperatures, whereas CFLs don't!</p>"
+				}
+//				
+//				with( .challenges[ #.challenges] ){
+//					.title = "Good news";
+//					.content = "<p>You are going well, but there is room for improvements.</p><p>Conduct regular energy audits to determine what condition your equipment is in and how it is performing. These audits will show where and how energy is being wasted and help you prioritize energy improvement measures. Do not know where to start? Begin with 'Guidelines for Energy Management' available with other tips for saving energy at www.energystar.gov.</p>"
+//				}
+				
+			};
+			
+			with( .( "HERA148231" ) ){
+				.label = "Building";
+				.users[ #.users ] = "mario rossi";
+				.users[ #.users ] = "arthur o' camlhot";
+				.users[ #.users ] = "ginevra del lago";
+				.users[ #.users ] = "lance cilotto"//;
+				
+//				with( .advices[ #.advices ] ){
+//					.title = "Energy Saving tips for Building";
+//					.content = "<ul><ol>Lower the temperature setting on your hot water heater to 120F.</ol><ol>Set your central heating and cooling system thermostats to 68F or lower in the winter and 72F or higher in the summer.</ol><ol>Turn off lights and appliances when not in use.</ol><ol>Actively manage indoor temperatures by opening and closing windows and window coverings (e.g., open windows to take advantage of cool evening breezes, close blinds or curtains against direct sunlight in the summer to reduce heat gain, open blinds or curtains to capture heat gain from sunlight during the winter, close blinds or curtains in the winter to reduce heat loss).</ol><ol>Ensure heating registers and vents are not blocked by furniture or window coverings.</ol><ol>Use cold water in your clothes washing machines and run only full loads.</ol><ol>Use a clothesline.</ol><ol>Use the 'air dry' cycle on your dishwasher and run only full loads.</ol><ol>Clean refrigerator coils and seals and defrost freezer units. Set the refrigerator temperature to 35F and the freezer temperature to 0F.</ol><ol>Reduce the use of heat-producing appliances (e.g., ovens, ranges, clothes dryers) on hot days.</ol><ol>Unplug or get rid of spare refrigerators and freezers, particularly if they are not ENERGY STAR appliances.</ol><ol>Use the stairs instead of an elevator.</ol><ol>Block off chimneys when not in use.</ol><ol>Drain sediment from your water heater tank.</ol></ul>"
+//				};
+//				with( .challenges[ #.challenges] ){
+//					.title = "A usage pick";
+//					.content = "<p>We registered an increasing usage of electricity in your building.</p><p>Use 'Smart' scheduling practices that go beyond matching occupancy times with equipment operation. Intelligent systems factor demand charges into the equation to complete the other half of the energy cost picture.</p>"
+//				};
+//				with( .challenges[ #.challenges] ){
+//					.title = "You are consuming too much";
+//					.content = "<p>You are using too much energy and your contract risks to loose the 'Great Price'</p><p>Help make sure building occupants are more informed through energy-saving tips. Create Web dashboards and on-site kiosks that educate and engage building occupants to promote energy conservation and reward wise energy decisions and behaviours. For example, a common misconception is that screen savers reduce energy consumption by monitors; they do not. It is more efficient to switch a monitor to sleep mode or manually turn it off.</p>"
+//				}
+				
+			}
+			
+		};
+		
+		with( global.points ){
+			.( "mario rossi" ).( "HERA148231" ) = 12314;
+			.( "mario rossi").("ENEL010000") = 52345
+		};
+		
+		with( global.consumption ){
+			for( i=0, i<12, i++){
+				.("ENEL010000")[ i ].date = "20120" + (i+1);
+				random@Math()( value );
+				.("ENEL010000")[ i ].value = value*100
+			};
+			
+			for( i=0, i<12, i++){
+				.( "HERA148231" )[ i ].date = "20120" + (i+1);
+				random@Math()( value );
+				.( "HERA148231" )[ i ].value = value*100
+			}
+		};
+		
+		with( global.suggestion ){
+			for( i=0, i<12, i++){
+				.("ENEL010000")[ i ].date = "20120" + (i+1);
+				random@Math()( value );
+				.("ENEL010000")[ i ].value = value*75
+			};
+			
+			for( i=0, i<12, i++){
+				.( "HERA148231" )[ i ].date = "20120" + (i+1);
+				random@Math()( value );
+				.( "HERA148231" )[ i ].value = value*80
+			}
+		}
+	}
+}
+
+define findUsernameByToken {
+	foreach ( name : global.users ){
+		if ( global.users.(name).token == _findUsernameByToken.token ){
+			_findUsernameByToken.username = name
+		}
+	}
+}
+
+main {
+	[ login( loginRequest )( authToken ){
+		if( loginRequest.password == global.users.( loginRequest.username ).password ){
+			authToken.token = global.users.(loginRequest.username).token
+		} else {
+			throw( LoginFault )
+		}
+	}]{ println@Console( "Successful login procedure for " + loginRequest.username )() }
+	
+	[ getPointCount( authToken )( pointCountResponse ){
+		_findUsernameByToken.token = authToken.token;
+		println@Console( "received getPointCount request: " + authToken.token )();
+		findUsernameByToken;
+		println@Console( "username associaciated with the token: " 
+			+ _findUsernameByToken.username	)();
+		foreach ( contract : global.points.( _findUsernameByToken.username ) ){
+			pointCountResponse.count = pointCountResponse.count + 
+				global.points.( _findUsernameByToken.username ).( contract )
+		};
+		println@Console( "total count sent to the client " + pointCountResponse.count )()
+	}]{ nullProcess }
+	
+	[ getContracts( authToken )( response ){
+		_findUsernameByToken.token = authToken.token;
+		findUsernameByToken;
+		username = _findUsernameByToken.username;
+		for( i=0, i < #global.contracts.( username ), i++ ){
+			contractID = global.contracts.( username )[ i ];
+			response.contracts[ #response.contracts ].id = contractID;
+			with ( response.contracts[ #response.contracts-1 ] ){
+				.label = global.contract.( contractID ).label;
+				.users << global.contract.( contractID ).users
+			}
+		}
+	}]{ nullProcess }
+	
+	[ getConsumption( request )( response ){
+		_findUsernameByToken.token = request.contractData.token;
+		findUsernameByToken;
+		if ( is_defined( _findUsernameByToken.username ) ) {
+			consumptionData << global.consumption.( request.contractData.id );
+			response.startDate = consumptionData[ 0 ].date;
+			// TODO LIMIT FROM DATE TO DATE
+			for( i=0, i < #consumptionData, i++ ){
+				response.data[ i ] = consumptionData[ i ].value
+			}
+		}
+	}]{ nullProcess }
+	
+//		[ getAdvices( request )( response ){
+//			foreach ( contract : global.contracts ){
+//				with( global.contracts ){
+//					for( i=0, i<#.( contract ).advices, i++){
+//						response[ #response ] << .( contract ).advices[ i ]
+//					}
+//				}
+//			}
+//		} ]{ nullProcess }
+//		
+//		[ getChallenges( request )( response ){
+//			foreach ( contract : global.contracts ){
+//				with( global.contracts ){
+//					for( i=0, i<#.( contract ).challenges, i++){
+//						response[ #response ] << .( contract ).advices[ i ]
+//					}
+//				}
+//			}
+//		} ]{ nullProcess }
+//		
+//		[ getContractChallenges( request )( response ){
+//			with( global.contracts.( request.id ) ){
+//				for( i=0, i < #.challenges, i++ ){
+//					response << .challenges[ i ]
+//				}
+//			}
+//		} ]{ nullProcess }
+//		
+//		[ getContractAdvices( request )( response ){
+//			with( global.contracts.( request.id ) ){
+//				for( i=0, i < #.advices, i++ ){
+//					response << .advices[ i ]
+//				}
+//			}
+//		} ]{ nullProcess }
+	
+		[ getSuggestion( request )( response ){
+		_findUsernameByToken.token = request.contractData.token;
+		findUsernameByToken;
+		if ( is_defined( _findUsernameByToken.username ) ) {
+			suggestionData << global.suggestion.( request.contractData.id );
+			response.startDate = suggestionData[ 0 ].date;
+			// TODO LIMIT FROM DATE TO DATE
+			for( i=0, i < #suggestionData, i++ ){
+				response.data[ i ] = suggestionData[ i ].value
+			}
+		}
+	}]{ nullProcess }
+	
+	[ getContractPointCount( request )( response ){
+		_findUsernameByToken.token = request.token;
+		findUsernameByToken;
+		response.count = global.points.( _findUsernameByToken.username ).( request.id )
+	}]{ nullProcess }
+	
+}

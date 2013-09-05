@@ -7,10 +7,12 @@ execution { concurrent }
 
 inputPort self {
 	Location: "local"
+//	Protocol: sodep
 	Interfaces: LoginInterface, ProfileInterface,	ContractInterface
 }
 
 init {
+	println@Console("dataService running")();
 	if ( !( global.first ) ){
 		global.first=true;
 		
@@ -29,7 +31,18 @@ init {
 				.label = "House";
 				.users[ #.users ] = "mario rossi";
 				.users[ #.users ] = "viola verdi";
-				.users[ #.users ] = "maria rossi"
+				.users[ #.users ] = "maria rossi";
+				
+				with( .advices[ 0 ] ){
+					.title = "Let's get LED!";
+					.content = "<p>There are three types of energy-saving light bulb: compact fluorescent lamps (CFLs), halogens and LEDs.</p><p>LEDs are the most expensive, but do have benefits over the other types:</p><p>LEDs use 90 percent less energy than incandescents (CFLs use 60-80 percent less than incandescents, and halogens use 20-30 percent less).</p><p>LEDs can last for 25-30 years, dependent on use.</p><p>LEDs give out their light quickly at start-up, so you don't have to put up with a few moments of dim light when you flick the light switch.</p><p>LED lights don't contain mercury (CFLs do, although it's only a small amount).</p><p>Our tests have found that LED lights, like halogens, work fine in low temperatures, whereas CFLs don't!</p>"
+				};
+			
+				with( .challenges[ 0 ] ){
+					.title = "Good news";
+					.content = "<p>You are going well, but there is room for improvements.</p><p>Conduct regular energy audits to determine what condition your equipment is in and how it is performing. These audits will show where and how energy is being wasted and help you prioritize energy improvement measures. Do not know where to start? Begin with 'Guidelines for Energy Management' available with other tips for saving energy at www.energystar.gov.</p>"
+				}
+				
 			};
 			
 			with( .( "HERA148231" ) ){
@@ -37,7 +50,23 @@ init {
 				.users[ #.users ] = "mario rossi";
 				.users[ #.users ] = "arthur o' camlhot";
 				.users[ #.users ] = "ginevra del lago";
-				.users[ #.users ] = "lance cilotto"
+				.users[ #.users ] = "lance cilotto";
+				
+				with( .advices[ 0 ] ){
+					.title = "Energy Saving tips for Building";
+					.content = "<ul><ol>Lower the temperature setting on your hot water heater to 120F.</ol><ol>Set your central heating and cooling system thermostats to 68F or lower in the winter and 72F or higher in the summer.</ol><ol>Turn off lights and appliances when not in use.</ol><ol>Actively manage indoor temperatures by opening and closing windows and window coverings (e.g., open windows to take advantage of cool evening breezes, close blinds or curtains against direct sunlight in the summer to reduce heat gain, open blinds or curtains to capture heat gain from sunlight during the winter, close blinds or curtains in the winter to reduce heat loss).</ol><ol>Ensure heating registers and vents are not blocked by furniture or window coverings.</ol><ol>Use cold water in your clothes washing machines and run only full loads.</ol><ol>Use a clothesline.</ol><ol>Use the 'air dry' cycle on your dishwasher and run only full loads.</ol><ol>Clean refrigerator coils and seals and defrost freezer units. Set the refrigerator temperature to 35F and the freezer temperature to 0F.</ol><ol>Reduce the use of heat-producing appliances (e.g., ovens, ranges, clothes dryers) on hot days.</ol><ol>Unplug or get rid of spare refrigerators and freezers, particularly if they are not ENERGY STAR appliances.</ol><ol>Use the stairs instead of an elevator.</ol><ol>Block off chimneys when not in use.</ol><ol>Drain sediment from your water heater tank.</ol></ul>"
+				};
+				
+				with( .challenges[ 0 ] ){
+					.title = "A usage pick";
+					.content = "<p>We registered an increasing usage of electricity in your building.</p><p>Use 'Smart' scheduling practices that go beyond matching occupancy times with equipment operation. Intelligent systems factor demand charges into the equation to complete the other half of the energy cost picture.</p>"
+				};
+				
+				with( .challenges[ 1 ] ){
+					.title = "You are consuming too much";
+					.content = "<p>You are using too much energy and your contract risks to loose the 'Great Price'</p><p>Help make sure building occupants are more informed through energy-saving tips. Create Web dashboards and on-site kiosks that educate and engage building occupants to promote energy conservation and reward wise energy decisions and behaviours. For example, a common misconception is that screen savers reduce energy consumption by monitors; they do not. It is more efficient to switch a monitor to sleep mode or manually turn it off.</p>"
+				}
+				
 			}
 			
 		};
@@ -74,7 +103,6 @@ init {
 				.( "HERA148231" )[ i ].value = value*80
 			}
 		}
-		
 	}
 }
 
@@ -87,7 +115,6 @@ define findUsernameByToken {
 }
 
 main {
-	
 	[ login( loginRequest )( authToken ){
 		if( loginRequest.password == global.users.( loginRequest.username ).password ){
 			authToken.token = global.users.(loginRequest.username).token
@@ -135,6 +162,42 @@ main {
 			}
 		}
 	}]{ nullProcess }
+	
+		[ getAdvices( request )( response ){
+			foreach ( contract : global.contract ){
+				with( global.contract ){
+					for( i=0, i<#.( contract ).advices, i++){
+						response.message[ #response.message ] << .( contract ).advices[ i ]						
+					}
+				}
+			}
+		} ]{ nullProcess }
+		
+		[ getChallenges( request )( response ){
+			foreach ( contract : global.contract ){
+				with( global.contract ){
+					for( i=0, i<#.( contract ).challenges, i++){
+						response.message[ #response.message ] << .( contract ).challenges[ i ]
+					}
+				}
+			}
+		} ]{ nullProcess }
+		
+		[ getContractChallenges( request )( response ){
+			with( global.contract.( request.id ) ){
+				for( i=0, i < #.challenges, i++ ){
+					response.message[ #response.message ] << .challenges[ i ]
+				}
+			}
+		} ]{ nullProcess }
+		
+		[ getContractAdvices( request )( response ){
+			with( global.contract.( request.id ) ){
+				for( i=0, i < #.advices, i++ ){
+					response.message[ #response.message ] << .advices[ i ]
+				}
+			}
+		} ]{ nullProcess }
 	
 		[ getSuggestion( request )( response ){
 		_findUsernameByToken.token = request.contractData.token;

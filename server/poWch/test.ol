@@ -4,8 +4,6 @@ include "string_utils.iol"
 include "time.iol"
 
 outputPort Powch {
-//	Location: "local"
-//	Protocol: sodep
 	Interfaces: LoginInterface, ProfileInterface, ContractInterface
 }
 
@@ -42,6 +40,22 @@ main {
 	suggestionRequest.contractData.id = consumptionRequest.contractData.id;
 	getSuggestion@Powch( suggestionRequest )( suggestionResponse );
 	valueToPrettyString@StringUtils( suggestionResponse )( prettyValue );
+	println@Console( prettyValue )();
+	
+	getAdvices@Powch( authToken )( response );
+	valueToPrettyString@StringUtils( response )( prettyValue );
+	println@Console( prettyValue )();
+	
+	getChallenges@Powch( authToken )( response );
+	valueToPrettyString@StringUtils( response )( prettyValue );
+	println@Console( prettyValue )();
+	
+	getContractChallenges@Powch( contractPointCountRequest )( response );
+	valueToPrettyString@StringUtils( response )( prettyValue );
+	println@Console( prettyValue )();
+	
+	getContractAdvices@Powch( contractPointCountRequest )( response );
+	valueToPrettyString@StringUtils( response )( prettyValue );
 	println@Console( prettyValue )()
 	
 }
