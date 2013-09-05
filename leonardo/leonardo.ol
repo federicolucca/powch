@@ -18,6 +18,7 @@ include "console.iol"
 include "file.iol"
 include "string_utils.iol"
 include "protocols/http.iol"
+include "../server/poWch/powch_interfaces.iol"
 
 include "config.iol"
 
@@ -26,6 +27,12 @@ execution { concurrent }
 interface HTTPInterface {
 RequestResponse:
 	default(DefaultOperationHttpRequest)(undefined)
+}
+
+outputPort loginService {
+	Location: "socket://localhost:9000"
+	Protocol: sodep
+	Interfaces: LoginInterface
 }
 
 inputPort HTTPInput {
@@ -40,6 +47,7 @@ Protocol: http {
 }
 Location: Location_Leonardo
 Interfaces: HTTPInterface
+Aggregates: loginService
 }
 
 init
