@@ -1,4 +1,3 @@
-
 var JolieClient = JolieClient || (function() {
     var API = {};
     var isError = function( data ) {
@@ -46,6 +45,12 @@ var JolieClient = JolieClient || (function() {
     }
     API.getContracts = function( request, callback, errorHandler ) {
         jolieCall( "getContracts", request, callback, errorHandler );
+    }
+    API.getChallenges = function( request, callback, errorHandler ) {
+        jolieCall( "getChallenges", request, callback, errorHandler );
+    }
+    API.getAdvice = function( request, callback, errorHandler ) {
+        jolieCall( "getAdvices", request, callback, errorHandler );
     }
     return API;
 })();

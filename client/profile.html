@@ -13,19 +13,33 @@
         <script type="text/javascript" src="js/jolie-client.js"></script>
         <script>
             
-            var token,
-                currentContract,
+            var currentContract,
                 suggestionData,
                 consumptionData;
             
             window.onload = function() {
-                var request;
-                token = sessionStorage.token;
+                var request = {token: sessionStorage.token};
                 currentContract = sessionStorage.contract;
                 $("#username").html(sessionStorage.username);
                 
+                $("#challenges").click(function() {
+                                       JolieClient.getAdvice(request, onGotAdvice, onError);
+                                       //$("#advice").modal("show");
+                                       });
+                
+                $("#advice").click(function() {
+                                       console.log("My request:");
+                                       console.log(request);
+                                       JolieClient.getChallenges(request, onGotChallenges, onError);
+                                       });
+                
+                $("#store").click(function() {
+                                    window.location.href = "store.html";
+                                  });
+                
                 console.log("Token: " + sessionStorage.token);
-                request = {token: sessionStorage.token};
+                
+                JolieClient.getChallenges(request, onGotChallenges, onError);
                 JolieClient.getPointCount(request, onGotPoints, onError);
                 JolieClient.getContracts(request, onGotContracts, onError);
                 // displayContract({label: "Apartment"});
@@ -59,6 +73,14 @@
                 $("#point-count").html("x " + response.count);
             }
             
+            function onGotChallenges(response) {
+                console.log(response);
+            }
+            
+            function onGotAdvice(response) {
+                console.log(response);
+            }
+            
             function onError(error) {
                 console.log(error);
             }
@@ -66,6 +88,24 @@
             </script>
     </head>
 	<body>
+        
+        <!-- Modals -->
+        <!-- User media request modal -->
+        <div id="challenge-modal" class="modal hide fade in">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">
+                    <!--i class="icon-remove-circle"></i-->
+                </a>
+                <h3> User guide </h3>
+            </div>
+            <div class="modal-body">
+                <p>Coming soon!</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-small" data-dismiss="modal">Close</a>
+            </div>
+        </div>
+        
         <div id="contents">
             <div id="nav-top" class="navbar navbar-fixed-top center">
                 <div class="navbar-inner">
@@ -101,19 +141,19 @@
             </div>
             
             <div id="misc-div" class="side-div">
-                <button class="btn btn-large" type="button">
+                <button id="challenges" class="btn btn-large" type="button">
                     Challenges
                 </button>
                 
-                <button class="btn btn-large" type="button">
+                <button id="advice" class="btn btn-large" type="button">
                     Advice
                 </button>
                 
-                <button class="btn btn-large" type="button">
+                <button id="store" class="btn btn-large" type="button">
                     Store
                 </button>
                 
-                <button class="btn btn-large" type="button">
+                <button id="invoices" class="btn btn-large" type="button">
                     Invoices
                 </button>
             </div>

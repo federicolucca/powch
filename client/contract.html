@@ -27,8 +27,6 @@
                 JolieClient.getConsumption(request, onGotConsumption, onError);
                 
                 users = JSON.parse(sessionStorage.contractUsers);
-                console.log("GAAAH");
-                console.log(users);
                 for (var i = 0; i < users.length; i++) {
                     console.log("Going to display " + users[i]);
                     displayUser(users[i]);
