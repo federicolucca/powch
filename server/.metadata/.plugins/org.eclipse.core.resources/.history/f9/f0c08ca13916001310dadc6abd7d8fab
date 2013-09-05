@@ -102,7 +102,7 @@ main {
 			pointCountResponse.count = pointCountResponse.count + 
 				global.points.( _findUsernameByToken.username ).( contract )
 		};
-		println@Console( "total count sent to the client " + pointCountResponse.count )()
+		println@Console( "" )
 	}]{ nullProcess }
 	
 	[ getContracts( authToken )( response ){

@@ -96,13 +96,11 @@ main {
 		_findUsernameByToken.token = authToken.token;
 		println@Console( "received getPointCount request: " + authToken.token )();
 		findUsernameByToken;
-		println@Console( "username associaciated with the token: " 
-			+ _findUsernameByToken.username	)();
 		foreach ( contract : global.points.( _findUsernameByToken.username ) ){
 			pointCountResponse.count = pointCountResponse.count + 
 				global.points.( _findUsernameByToken.username ).( contract )
 		};
-		println@Console( "total count sent to the client " + pointCountResponse.count )()
+		
 	}]{ nullProcess }
 	
 	[ getContracts( authToken )( response ){
