@@ -7,7 +7,7 @@ execution { concurrent }
 
 inputPort self {
 	Location: "local"
-//	Protocol: sodep
+	Protocol: sodep
 	Interfaces: LoginInterface, ProfileInterface,	ContractInterface
 }
 

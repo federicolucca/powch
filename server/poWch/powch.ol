@@ -1,14 +1,16 @@
 include "console.iol"
 include "powch_interfaces.iol"
+include "DataServiceSurface.iol"
 
 execution { concurrent }
 
 outputPort DataService {
-	Interfaces: LoginInterface, ProfileInterface, ContractInterface
+	Interfaces: selfSurface
 }
 
 inputPort self {
 	Location: "local"
+	Protocol: sodep
 	Interfaces: PowchAdministrationInterface
 	Aggregates: DataService
 }
