@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>PoWch</title>
+        
+        <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/powch.css"/>
+        <link rel="stylesheet" type="text/css" href="css/main.css"/>
+        
+        <script type="text/javascript" src="lib/jquery.min.js"></script>
+        <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="lib/chart.min.js"></script>
+        <script type="text/javascript" src="js/jolie-client.js"></script>
+        <script>
+            
+            var token;
+            
+            window.onload = function() {
+                token = sessionStorage.token;
+                $("#username").html(sessionStorage.username);
+                
+                var request = {id: /*TODO: put something here*/"", token: token};
+                function onGotSuggestion(response) {
+                    var data = response.data;
+                    // TODO: Display the data
+                };
+                function onError(error) {
+                    console.log(error);
+                };
+                
+                // JolieClient.suggestion(request, onGotSuggestion, onError);
+                
+                var lineChartData = {
+                    labels : ["January","February","March","April","May","June","July"],
+                    datasets : [
+                                {
+                                fillColor : "rgba(220,220,220,0.5)",
+                                strokeColor : "rgba(220,220,220,1)",
+                                pointColor : "rgba(220,220,220,1)",
+                                pointStrokeColor : "#fff",
+                                data : [65,59,90,81,56,55,40]
+                                },
+                                {
+                                fillColor : "rgba(151,187,205,0.5)",
+                                strokeColor : "rgba(151,187,205,1)",
+                                pointColor : "rgba(151,187,205,1)",
+                                pointStrokeColor : "#fff",
+                                data : [28,48,40,19,96,27,100]
+                                }
+                                ]
+                    
+                }
+                
+                var canvas = document.getElementById("chart").getContext("2d");
+                var chart = new Chart(canvas).Line(lineChartData);
+                console.log(chart);
+                
+            };
+            
+            </script>
+    </head>
+	<body>
+        
+        <div id="nav-top" class="navbar navbar-fixed-top center">
+            <div class="navbar-inner">
+                <a class="brand">PoWch</a>
+            </div>
+        </div>
+        
+        <div id="user-info">
+            
+            <div id="profile">
+                <img id="profile-img" src="../img/default-profile.png"></img>
+                <p id="username"></p>
+                <img id="powch" src="../img/powch-mini.png"></img>
+                <h4 id="point-count">x 1552</h4>
+            </div>
+            
+            <div id="battery-div">
+                <div id="battery-meter" class="progress progress-success progress-striped">
+                    <div class="bar" style="width: 60%"></div>
+                </div>
+                <img id="battery-img" src="../img/battery.png"></img>
+            </div>
+            
+        </div>
+        
+        <div id="chart-div">
+            <h5 id="mwh">MWh</h5>
+            <canvas id="chart" height="300" width="600"></canvas>
+            <img id="power-plant-img" src="../img/power-plant.png"></img>
+            <img id="lightbulb-img" src="../img/lightbulb.png"></img>
+            <img id="candle-img" src="../img/candle.png"></img>
+        </div>
+        
+        <div class="navbar navbar-fixed-bottom">
+            <div class="navbar-inner">
+            </div>
+        </div>
+        
+    </body>
+</html>
+

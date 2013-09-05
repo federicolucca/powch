@@ -5,7 +5,7 @@
         
         <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css"/>
         <link rel="stylesheet" type="text/css" href="css/powch.css"/>
-        <link rel="stylesheet" type="text/css" href="css/login.css"/> 
+        <link rel="stylesheet" type="text/css" href="css/index.css"/> 
         
         <script type="text/javascript" src="lib/jquery.min.js"></script>
         <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
@@ -30,7 +30,9 @@
                 
                 function onSuccess(response) {
                     sessionStorage.token = response.token;
-                    alert("You got this token: " + response.token);
+                    sessionStorage.username = username;
+                    console.log("Received token: " + response.token);
+                    window.location.href = "main.html";
                 }
                 function onError(error) {
                     console.log(error);

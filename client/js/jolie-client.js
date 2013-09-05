@@ -11,29 +11,33 @@ var JolieClient = JolieClient || (function() {
     
     var jolieCall = function( operation, request, callback, errorHandler ) {
         $.ajax({
-               url: '/' + operation,
-               dataType: 'json',
-               data: JSON.stringify( request ),
-               type: 'POST',
-               contentType: 'application/json',
-               success: function( data ){
+            url: '/' + operation,
+            dataType: 'json',
+            data: JSON.stringify( request ),
+            type: 'POST',
+            contentType: 'application/json',
+            success: function( data ){
                if ( isError( data ) ) {
-               errorHandler( data.jolieFault );
+                    errorHandler( data.jolieFault );
                } else {
-               callback( data );
+                    callback( data );
                }
-               },
-               error:function(errorType, textStatus, errorThrown) {
-               alert( errorThrown );
-               }
-               });
+            },
+            error:function(errorType, textStatus, errorThrown) {
+                alert( errorThrown );
+            }
+        });
     }
 
     API.login = function( request, callback, errorHandler ) {
-        jolieCall( "login", request, callback, errorHandler );
+                                  // callback({token: "fakeToken"});
+                                  jolieCall( "login", request, callback, errorHandler );
     }
     API.consumption = function( request, callback, errorHandler ) {
         jolieCall( "consumption", request, callback, errorHandler );
+    }
+    API.suggestion = function( request, callback, errorHandler ) {
+        jolieCall( "suggestion", request, callback, errorHandler );
     }
     API.advice = function( request, callback, errorHandler ) {
         jolieCall( "advice", request, callback, errorHandler );
