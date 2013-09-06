@@ -15,8 +15,9 @@
             
             var token, consumptionData, suggestionData;
             
-            window.onload = function() {              
+            window.onload = function() {
                 var request, users;
+                $("#contract-label").html(sessionStorage.contractLabel);
                 $("#back-button").click(function() {
                                         window.history.back();
                                         });
@@ -128,9 +129,8 @@
                 <div class="navbar-inner">
                     <a class="brand">PoWch</a>
                     <ul class="nav">
-                        <li><a id="contract-label" href="#">Link</a></li>
+                        <li><a id="contract-label"></a></li>
                     </ul>
-                    
                 </div>
             </div>
             

@@ -33,12 +33,12 @@
                 JolieClient.getAdvice(request, onGotAdvice, onError);
                 JolieClient.getPointCount(request, onGotPoints, onError);
                 JolieClient.getContracts(request, onGotContracts, onError);
-                // displayContract({label: "Apartment"});
             };
             
             function displayContract(contract) {
                 var contractButton = $("#hidden-contract").clone();
                 $(contractButton).click(function() {
+                              sessionStorage.contractLabel = contract.label;
                               sessionStorage.contractId = contract.id;
                               if (contract.users.length > 0) {
                               sessionStorage.contractUsers = JSON.stringify(contract.users);
@@ -49,7 +49,7 @@
                               });
                 contractButton.html(contract.label);
                 contractButton.css("display", "inline-block");
-                $("#contracts-div").append(contractButton);
+                $("#contract-body").append(contractButton);
             }
             
             // Callback functions
@@ -117,28 +117,41 @@
                 </div>
             </div>
             
+            
             <div id="contracts-div" class="side-div">
-                <button id="hidden-contract" class="btn btn-large proto-contract" type="button">
-                    House
-                </button>
+                <div class="side-div-header">
+                    <h4 id="users-title">Contracts</h4>
+                </div>
+                
+                <div id="contract-body" class="side-div-body">
+                    <button id="hidden-contract" class="btn btn-large proto-contract" type="button">
+                        House
+                    </button>
+                </div>
+                
             </div>
             
             <div id="misc-div" class="side-div">
-                <button id="challenges" class="btn btn-large" type="button">
-                    Challenges
-                </button>
-                
-                <button id="advice" class="btn btn-large" type="button">
-                    Advice
-                </button>
-                
-                <button id="store" class="btn btn-large" type="button">
-                    Store
-                </button>
-                
-                <button id="invoices" class="btn btn-large" type="button">
-                    Invoices
-                </button>
+                <div class="side-div-header">
+                    <h4 id="users-title">Miscellaneous</h4>
+                </div>
+                <div class="side-div-body">
+                    <button id="challenges" class="btn btn-large" type="button">
+                        Challenges
+                    </button>
+                    
+                    <button id="advice" class="btn btn-large" type="button">
+                        Advice
+                    </button>
+                    
+                    <button id="store" class="btn btn-large" type="button">
+                        Store
+                    </button>
+                    
+                    <button id="invoices" class="btn btn-large" type="button">
+                        Invoices
+                    </button>
+                </div>
             </div>
             
             <div class="navbar navbar-fixed-bottom">

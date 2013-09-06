@@ -5,47 +5,7 @@
         
         <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css"/>
         <link rel="stylesheet" type="text/css" href="css/powch.css"/>
-        <link rel="stylesheet" type="text/css" href="css/index.css"/> 
-        
-        <style type="text/css">
-            /*
-            #user-info {
-                position: absolute;
-                top: 100px;
-                left: 50%;
-                width: 300px;
-                margin-left: -150px;
-                height: 250px;
-            }
-            
-            #username {
-                position: absolute;
-                top: 20px;
-                font-weight: bold;
-                left: 140px;
-                margin-left:
-            }
-            
-            #points-div {
-                position: absolute;
-                top: 60px;
-                left: 130px;
-            }
-            
-            #powch {
-                position: absolute;
-                top: 10px;
-            }
-            
-            #point-count {
-                position: absolute;
-                width: 100px;
-                left: 55px;
-                top: 25px;
-            }
-*/
-            </style>
-        
+        <link rel="stylesheet" type="text/css" href="css/store.css"/>
         
         <script type="text/javascript" src="lib/jquery.min.js"></script>
         <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
@@ -63,7 +23,10 @@
                 currentContract = sessionStorage.contract;
                 $("#username").html(sessionStorage.username);
                 
-                console.log("Token: " + sessionStorage.token);
+                $("#back-button").click(function() {
+                                        window.history.back();
+                                        });
+                
                 request = {token: sessionStorage.token};
                 /*
                 JolieClient.getPointCount(request, onGotPoints, onError);
@@ -119,125 +82,128 @@
             </script>
     </head>
 	<body>
-         <div id="contents">
         <div id="nav-top" class="navbar navbar-fixed-top center">
             <div class="navbar-inner">
                 <a class="brand">PoWch</a>
+                <ul class="nav">
+                    <li><a id="store-brand">Store</a></li>
+                </ul>
             </div>
         </div>
         
-
+        <div id="points-div">
+            <img id="powch" src="img/powch-mini.png"></img>
+            <h4 id="point-count">x 0000</h4>
+        </div>
         
-        <div class="container center" >
-<h1 id="welcome">Store</h1>
- <div id="user-info">
-                <div id="profile">
-                    <img id="profile-img" src="img/default-profile.png"></img>
-                    <h4 id="username"></h4>
-                    <div id="points-div">
-                        <img id="powch" src="img/powch-mini.png"></img>
-                        <h4 id="point-count">x 0000</h4>
-                    </div>
-                </div>
-            </div>
-
-     
-            <ul class="thumbnails" style="margin-top:80px">
-<li class="span5 clearfix">
-  <div class="thumbnail clearfix">
-    <img src="img/muse.png" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
-    <div class="caption" class="pull-left">
-      <a id="300" class="btn btn-large icon  pull-right">Select (300pts)</a>
-      <h4>      
-      <a href="#" >#1 Museum Tickets </a>
-      </h4>
-      <small><b>RG: </b>99384877</small>
+        <button id="back-button" class="btn" type="button">
+            <i class="icon-arrow-left"></i>
+            Profile
+        </button>
         
-      
-    </div>
-  </div>
-</li>
-  <li class="span5 clearfix">
-  <div class="thumbnail clearfix">
-    <img src="img/muse.png" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
-    <div class="caption" class="pull-left">
-      <a id="400" class="btn btn-large icon  pull-right">Select (400pts)</a>
-      <h4>      
-      <a href="#" >#2 Museum Tickets </a>
-      </h4>
-      <small><b>RG: </b>99384877</small>
-        
-      
-    </div>
-  </div>
-</li>
-  <li class="span5 clearfix">
-  <div class="thumbnail clearfix">
-    <img src="img/muse.png" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
-    <div class="caption" class="pull-left">
-      <a id="600" class="btn btn-large icon  pull-right">Select (600pts)</a>
-      <h4>      
-      <a href="#" >#1 Family Museum Ticket </a>
-      </h4>
-      <small><b>RG: </b>99384877</small>
-        
-      
-    </div>
-  </div>
-</li>
-  <li class="span5 clearfix">
-  <div class="thumbnail clearfix">
-    <img src="img/car.png" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
-    <div class="caption" class="pull-left">
-      <a id="40" class="btn btn-large icon  pull-right fortypoints">Select (40pts)</a>
-      <h4>      
-      <a href="#" >#1 Park Ticket(60min) </a>
-      </h4>
-      <small><b>RG: </b>99384877</small>
-        
-      
-    </div>
-  </div>
-</li>
-  <li class="span5 clearfix">
-  <div class="thumbnail clearfix">
-    <img src="img/car.png" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
-    <div class="caption" class="pull-left">
-      <a id="100" class="btn btn-large icon  pull-right">Select (100pts)</a>
-      <h4>      
-      <a href="#" >#1 Park Ticket(120min)</a>
-      </h4>
-      <small><b>RG: </b>99384877</small>
-        
-      
-    </div>
-  </div>
-</li>
-  <li class="span5 clearfix">
-  <div class="thumbnail clearfix">
-    <img src="img/car.png" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
-    <div class="caption" class="pull-left">
-      <a id="240" class="btn btn-medium icon  pull-right">Select (240pts)</a>
-      <h4>      
-      <a href="#" >#1 Full Day Park Ticket(1day)</a>
-      </h4>
-      <small><b>RG: </b>99384877</small>
-        
-      
-    </div>
-  </div>
-</li>
- 
-
-        </div> </div>
-        
-       
-        
+        <!--h1 id="welcome">Store</h1-->
+        <div id="contents">
+            
+            <!--div id="user-info">
+             <div id="profile">
+             <img id="profile-img" src="img/default-profile.png"></img>
+             <h4 id="username"></h4>
+             <div id="points-div">
+             <img id="powch" src="img/powch-mini.png"></img>
+             <h4 id="point-count">x 0000</h4>
+             </div>
+             </div>
+             </div-->
+            
+            
+            <ul class="thumbnails" style="margin-top:60px">
+                <li class="span5 clearfix">
+                    <div class="thumbnail clearfix">
+                        <img src="img/muse.png" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
+                            <div class="caption" class="pull-left">
+                                <a id="300" class="btn btn-large icon  pull-right">Select (300pts)</a>
+                                <h4>
+                                    <a href="#" >#1 Museum Tickets </a>
+                                </h4>
+                                <small><b>RG: </b>99384877</small>
+                                
+                                
+                            </div>
+                            </div>
+                </li>
+                <li class="span5 clearfix">
+                    <div class="thumbnail clearfix">
+                        <img src="img/muse.png" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
+                            <div class="caption" class="pull-left">
+                                <a id="400" class="btn btn-large icon  pull-right">Select (400pts)</a>
+                                <h4>
+                                    <a href="#" >#2 Museum Tickets </a>
+                                </h4>
+                                <small><b>RG: </b>99384877</small>
+                                
+                                
+                            </div>
+                            </div>
+                </li>
+                <li class="span5 clearfix">
+                    <div class="thumbnail clearfix">
+                        <img src="img/muse.png" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
+                            <div class="caption" class="pull-left">
+                                <a id="600" class="btn btn-large icon  pull-right">Select (600pts)</a>
+                                <h4>
+                                    <a href="#" >#1 Family Museum Ticket </a>
+                                </h4>
+                                <small><b>RG: </b>99384877</small>
+                                
+                                
+                            </div>
+                            </div>
+                </li>
+                <li class="span5 clearfix">
+                    <div class="thumbnail clearfix">
+                        <img src="img/car.png" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
+                            <div class="caption" class="pull-left">
+                                <a id="40" class="btn btn-large icon  pull-right fortypoints">Select (40pts)</a>
+                                <h4>
+                                    <a href="#" >#1 Park Ticket(60min) </a>
+                                </h4>
+                                <small><b>RG: </b>99384877</small>
+                                
+                                
+                            </div>
+                            </div>
+                </li>
+                <li class="span5 clearfix">
+                    <div class="thumbnail clearfix">
+                        <img src="img/car.png" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
+                            <div class="caption" class="pull-left">
+                                <a id="100" class="btn btn-large icon  pull-right">Select (100pts)</a>
+                                <h4>
+                                    <a href="#" >#1 Park Ticket(120min)</a>
+                                </h4>
+                                <small><b>RG: </b>99384877</small>
+                                
+                                
+                            </div>
+                            </div>
+                </li>
+                <li class="span5 clearfix">
+                    <div class="thumbnail clearfix">
+                        <img src="img/car.png" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
+                            <div class="caption" class="pull-left">
+                                <a id="240" class="btn btn-medium icon  pull-right">Select (240pts)</a>
+                                <h4>
+                                    <a href="#" >#1 Full Day Park Ticket(1day)</a>
+                                </h4>
+                                <small><b>RG: </b>99384877</small>                                
+                            </div>
+                            </li>                
+                </div> </div>
+                
         <div class="navbar navbar-fixed-bottom">
             <div class="navbar-inner">
             </div>
         </div>
-        
     </body>
 </html>
 
