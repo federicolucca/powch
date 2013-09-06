@@ -113,5 +113,7 @@
 }
 
 .proto-user {
-    font-size: 1em;
+    font-size: 1.4em;
+    margin-top: 10px;
+    width: 100%;
 }

@@ -70,11 +70,48 @@
                 JolieClient.getContracts(request, onGotContracts, onError);
                  */
                 // displayContract({label: "Apartment"});
-                $("#point-count").html(sessionStorage.points);
-                $(".hundredpoints").click(function(){
-                    sessionStorage.points -= 100;
-                    $("#point-count").html(sessionStorage.points);
+                $("#point-count").html("x " + sessionStorage.points);
+                $(".btn").click(function(){
+                                buy(this.id);
                 });                
+            };
+            
+            function buy(id) {
+                var amount;
+                switch (id) {
+                    case "300":
+                    amount = 300;
+                    break;
+                    
+                    case "400":
+                    amount = 400;
+                    break;
+                    
+                    case "300":
+                    amount = 300;
+                    break;
+                    
+                    case "600":
+                    amount = 600;
+                    break;
+                    
+                    case "40":
+                    amount = 40;
+                    break;
+                    
+                    case "240":
+                    amount = 240;
+                    break;
+                    
+                    case "10":
+                    amount = 10;
+                    break;
+                    
+                    default:
+                    amount = 0;
+                }
+                sessionStorage.points -= amount;
+                $("#point-count").html("x " + sessionStorage.points);
             };
             
            
@@ -110,7 +147,7 @@
   <div class="thumbnail clearfix">
     <img src="img/muse.png" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
     <div class="caption" class="pull-left">
-      <a href="http://bootsnipp.com/" class="btn btn-large icon  pull-right">Select (300pts)</a>
+      <a id="300" class="btn btn-large icon  pull-right">Select (300pts)</a>
       <h4>      
       <a href="#" >#1 Museum Tickets </a>
       </h4>
@@ -124,7 +161,7 @@
   <div class="thumbnail clearfix">
     <img src="img/muse.png" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
     <div class="caption" class="pull-left">
-      <a href="http://bootsnipp.com/" class="btn btn-large icon  pull-right fourhundred">Select (400pts)</a>
+      <a id="400" class="btn btn-large icon  pull-right">Select (400pts)</a>
       <h4>      
       <a href="#" >#2 Museum Tickets </a>
       </h4>
@@ -138,7 +175,7 @@
   <div class="thumbnail clearfix">
     <img src="img/muse.png" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
     <div class="caption" class="pull-left">
-      <a class="btn btn-large icon  pull-right sixhundred">Select (600pts)</a>
+      <a id="600" class="btn btn-large icon  pull-right">Select (600pts)</a>
       <h4>      
       <a href="#" >#1 Family Museum Ticket </a>
       </h4>
@@ -152,7 +189,7 @@
   <div class="thumbnail clearfix">
     <img src="img/car.png" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
     <div class="caption" class="pull-left">
-      <a href="http://bootsnipp.com/" class="btn btn-large icon  pull-right fortypoints">Select (40pts)</a>
+      <a id="40" class="btn btn-large icon  pull-right fortypoints">Select (40pts)</a>
       <h4>      
       <a href="#" >#1 Park Ticket(60min) </a>
       </h4>
@@ -166,7 +203,7 @@
   <div class="thumbnail clearfix">
     <img src="img/car.png" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
     <div class="caption" class="pull-left">
-      <a class="btn btn-large icon  pull-right hundredpoints">Select (100pts)</a>
+      <a id="100" class="btn btn-large icon  pull-right">Select (100pts)</a>
       <h4>      
       <a href="#" >#1 Park Ticket(120min)</a>
       </h4>
@@ -180,7 +217,7 @@
   <div class="thumbnail clearfix">
     <img src="img/car.png" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
     <div class="caption" class="pull-left">
-      <a href="http://bootsnipp.com/" class="btn btn-medium icon  pull-right">Select (240pts)</a>
+      <a id="240" class="btn btn-medium icon  pull-right">Select (240pts)</a>
       <h4>      
       <a href="#" >#1 Full Day Park Ticket(1day)</a>
       </h4>
