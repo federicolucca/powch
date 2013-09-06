@@ -26,10 +26,10 @@
                 
                 JolieClient.getSuggestion(request, onGotSuggestion, onError);
                 JolieClient.getConsumption(request, onGotConsumption, onError);
+                //JolieClient.getContractPointCount(request, onGotPoints, onError);
                 
                 users = JSON.parse(sessionStorage.contractUsers);
                 for (var i = 0; i < users.length; i++) {
-                    console.log("Going to display " + users[i]);
                     displayUser(users[i]);
                 }                
             };
@@ -93,7 +93,6 @@
             };
             
             function displayUser(user) {
-                console.log("Displaying: " + user);
                 var userLink = $("#hidden-user").clone();
                 $("#users-body").append(userLink);
                 userLink.html(user);
@@ -107,17 +106,23 @@
                 if (consumptionData && suggestionData) {
                     displayInfo();
                 }
-            };
+            }
+            
             function onGotConsumption(response) {
                 suggestionData = response.data;
                 // If all necessary data is received, display the chart
                 if (consumptionData && suggestionData) {
                     displayInfo();
                 }
-            };
+            }
+            
+            function onGotPoints(response) {
+                console.log(response);
+            }
+            
             function onError(error) {
                 console.log(error);
-            };
+            }
             
             </script>
     </head>
@@ -164,6 +169,11 @@
                 </div>
                 <img id="battery-img" src="img/battery.png"></img>
             </div>
+            
+            <!--div id="points-div">
+                <h4>Points earned: </h4>
+                 <h4 id="points">3332</h4>
+            </div-->
             
             <div class="navbar navbar-fixed-bottom">
                 <div class="navbar-inner">

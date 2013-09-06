@@ -27,8 +27,6 @@
                                     window.location.href = "store.html";
                                   });
                 
-                console.log("Token: " + sessionStorage.token);
-                
                 JolieClient.getChallenges(request, onGotChallenges, onError);
                 JolieClient.getAdvice(request, onGotAdvice, onError);
                 JolieClient.getPointCount(request, onGotPoints, onError);
@@ -81,7 +79,6 @@
             function onGotAdvice(response) {
                 remainingAdvice = response.message.length;
                 $("#advice").click(function() {
-                                   console.log(response);
                                    $("#advice-header").html(response.message[remainingAdvice - 1].title);
                                    $("#advice-message").html(response.message[remainingAdvice - 1].content);
                                    $("#advice-modal").modal("show");

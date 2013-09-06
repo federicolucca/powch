@@ -52,5 +52,8 @@ var JolieClient = JolieClient || (function() {
     API.getAdvice = function( request, callback, errorHandler ) {
         jolieCall( "getAdvices", request, callback, errorHandler );
     }
+    API.getContractPointCount = function( request, callback, errorHandler ) {
+        jolieCall( "getContractPointCount", request, callback, errorHandler );
+    }
     return API;
 })();

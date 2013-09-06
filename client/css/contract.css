@@ -117,3 +117,15 @@
     margin-top: 10px;
     width: 100%;
 }
+
+#points-div {
+    position: absolute;
+    top: 40px;
+    left: 350px;
+}
+
+#points {
+    position: absolute;
+    top: 0;
+    left: 130px;
+}
